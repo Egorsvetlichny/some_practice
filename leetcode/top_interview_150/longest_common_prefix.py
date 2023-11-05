@@ -10,16 +10,17 @@ class Solution(object):
         :rtype: str
         """
 
-        common_substring = ""
-        for i in range(len(strs[0])):
-            symbol = strs[0][i]
+        common_prefix = ""
+        min_str = min(strs, key=lambda item: len(item))
 
-            for j in range(1, len(strs)):
-                if strs[j][i] != symbol or len(strs[j]) < i:
-                    return common_substring
-            common_substring += symbol
+        for i in range(len(min_str)):
+            sign = min_str[i]
+            for j in range(len(strs)):
+                if sign != strs[j][i]:
+                    return common_prefix
+            common_prefix += sign
 
-        return common_substring
+        return common_prefix
 
 
 if __name__ == '__main__':
@@ -32,3 +33,7 @@ if __name__ == '__main__':
     # test case 2
     strs = ["dog", "racecar", "car"]
     assert solution.longestCommonPrefix(strs) == ""
+
+    # test case 3
+    strs = ["ab", "a"]
+    assert solution.longestCommonPrefix(strs) == "a"
